@@ -60,7 +60,7 @@ public class Autoloading extends AbstractTrait {
 		}
 	}
 	
-	private static final MirrorUtils.IField<Integer> rightClickDelayTimer$Minecraft = MirrorUtils.reflectObfusField(Minecraft.class, "field_71467_ac");
+	private static MirrorUtils.IField<Integer> rightClickDelayTimer$Minecraft;
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -69,6 +69,10 @@ public class Autoloading extends AbstractTrait {
 
 	    if (mc.player == null) {
 	        return;
+	    }
+
+	    if (rightClickDelayTimer$Minecraft == null) {
+	        rightClickDelayTimer$Minecraft = MirrorUtils.reflectObfusField(Minecraft.class, "field_71467_ac");
 	    }
 
 	    ItemStack stack = mc.player.getHeldItemMainhand();
